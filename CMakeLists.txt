@@ -36,26 +36,31 @@ include(ExternalProject)
 set(EMOKIT_TARGET_NAME emokit_project)
 ExternalProject_Add(${EMOKIT_TARGET_NAME}
   GIT_REPOSITORY "https://github.com/openyou/emokit"
-  GIT_TAG "origin/master"
   PATCH_COMMAND ""
   PREFIX "${CMAKE_CURRENT_SOURCE_DIR}"
   INSTALL_DIR ""
   INSTALL_COMMAND ""
   CONFIGURE_COMMAND "cmake" "."
-  BUILD_COMMAND "make"
+  BUILD_COMMAND "make" "emokit"
   BUILD_IN_SOURCE 1
 )
-
 set(EMOKIT_LIBRARY ${CPM_LIB_TARGET_NAME})
 add_library(${EMOKIT_LIBRARY} SHARED IMPORTED GLOBAL)
 add_dependencies(${EMOKIT_LIBRARY} ${EMOKIT_TARGET_NAME})
 
 ExternalProject_Get_Property(${EMOKIT_TARGET_NAME} SOURCE_DIR)
+
 set(REPO_SOURCE_DIR "${SOURCE_DIR}")
 set(REPO_INCLUDE_DIR "${REPO_SOURCE_DIR}/include")
 
-CPM_ExportAdditionalIncludeDir(${REPO_INCLUDE_DIR})
-include_directories(${REPO_INCLUDE_DIR})
+CPM_EnsureRepoIsCurrent(
+  TARGET_DIR ${REPO_SOURCE_DIR}
+  GIT_REPOSITORY "https://github.com/openyou/emokit"
+  USE_CACHING TRUE
+  )
+
+CPM_ExportAdditionalIncludeDir("${REPO_INCLUDE_DIR}")
+include_directories("${REPO_INCLUDE_DIR}")
 message(STATUS "including directory: ${REPO_INCLUDE_DIR}")
 
 CPM_ExportAdditionalLibraryTarget(emokit)
