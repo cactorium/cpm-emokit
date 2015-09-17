@@ -1,3 +1,5 @@
+cmake_minimum_required(2.8.5)
+
 #-----------------------------------------------------------------------
 # CPM configuration
 #-----------------------------------------------------------------------
@@ -39,5 +41,5 @@ CPM_EnsureRepoIsCurrent(
   USE_CACHING TRUE
   )
 
-add_subdirectory("${REPO_SOURCE_DIR})
+add_subdirectory("${REPO_SOURCE_DIR}")
 CPM_ExportAdditionalIncludeDir("${REPO_SOURCE_DIR}/include")
