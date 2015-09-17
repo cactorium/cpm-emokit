@@ -54,7 +54,4 @@ set(REPO_SOURCE_DIR "${SOURCE_DIR}")
 set(REPO_INCLUDE_DIR "${REPO_SOURCE_DIR}/include")
 
 CPM_ExportAdditionalIncludeDir("${REPO_INCLUDE_DIR}")
-include_directories("${REPO_INCLUDE_DIR}")
 message(STATUS "including directory: ${REPO_INCLUDE_DIR}")
-
-CPM_ExportAdditionalLibraryTarget(emokit)
