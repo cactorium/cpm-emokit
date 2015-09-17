@@ -27,4 +27,4 @@ CPM_AddModule("cpm-emokit"
 CPM_Finish()
 
 add_executable(test test.c)
-add_dependencies(test ${CPM_LIBRARIES}) 
+target_link_libraries(test ${CPM_LIBRARIES}) 
