@@ -7,4 +7,6 @@ cpm-packages/
 Makefile
 cmake_install.cmake
 emokit_external-prefix/
-
+3rdParty/
+bin/
+lib/
