@@ -1,5 +1,6 @@
 *.swp
-3rdParty/
+src/
+tmp/
 CMakeCache.txt
 CMakeFiles/
 cpm-packages/
