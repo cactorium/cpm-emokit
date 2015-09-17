@@ -31,16 +31,8 @@ endif()
 
 CPM_InitModule(${CPM_MODULE_NAME})
 
-# set(REPO_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/3rdParty/emokit")
-
 include(ExternalProject)
 
-#CPM_EnsureRepoIsCurrent(
-#TARGET_DIR ${REPO_SOURCE_DIR}
-#GIT_REPOSITORY "https://github.com/openyou/emokit"
-#GIT_TAG "origin/master"
-#USE_CACHING TRUE
-#)
 set(EMOKIT_TARGET_NAME emokit_project)
 ExternalProject_Add(${EMOKIT_TARGET_NAME}
   GIT_REPOSITORY "https://github.com/openyou/emokit"
@@ -54,14 +46,15 @@ ExternalProject_Add(${EMOKIT_TARGET_NAME}
   BUILD_IN_SOURCE 1
 )
 
-# list(APPEND CMAKE_MODULE_PATH "${REPO_SOURCE_DIR}")
-# add_subdirectory("${REPO_SOURCE_DIR}")
-# include("${REPO_SOURCE_DIR}/CMakeLists.txt")
+set(EMOKIT_LIBRARY ${CPM_LIB_TARGET_NAME})
+add_library(${EMOKIT_LIBRARY} SHARED IMPORTED GLOBAL)
+add_dependencies(${EMOKIT_LIBRARY} ${EMOKIT_TARGET_NAME})
 
-set(REPO_SOURCE_DIR, "${CMAKE_CURRENT_SOURCE_DIR}/src/emokit")
+ExternalProject_Get_Property(${MONGO_EP_TARGET_NAME} SOURCE_DIR)
+set(REPO_SOURCE_DIR, "${SOURCE_DIR}")
 set(REPO_INCLUDE_DIR, "${REPO_SOURCE_DIR}/include")
 
 CPM_ExportAdditionalIncludeDir(${REPO_INCLUDE_DIR})
 include_directories(${REPO_INCLUDE_DIR})
 
-CPM_ExportAdditionalLibraryTarget("emokit")
+CPM_ExportAdditionalLibraryTarget(emokit)
