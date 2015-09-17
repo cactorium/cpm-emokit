@@ -51,10 +51,11 @@ add_library(${EMOKIT_LIBRARY} SHARED IMPORTED GLOBAL)
 add_dependencies(${EMOKIT_LIBRARY} ${EMOKIT_TARGET_NAME})
 
 ExternalProject_Get_Property(${EMOKIT_TARGET_NAME} SOURCE_DIR)
-set(REPO_SOURCE_DIR, "${SOURCE_DIR}")
-set(REPO_INCLUDE_DIR, "${REPO_SOURCE_DIR}/include")
+set(REPO_SOURCE_DIR "${SOURCE_DIR}")
+set(REPO_INCLUDE_DIR "${REPO_SOURCE_DIR}/include")
 
 CPM_ExportAdditionalIncludeDir(${REPO_INCLUDE_DIR})
 include_directories(${REPO_INCLUDE_DIR})
+message(STATUS "including directory: ${REPO_INCLUDE_DIR}")
 
 CPM_ExportAdditionalLibraryTarget(emokit)
