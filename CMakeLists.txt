@@ -1,5 +1,3 @@
-cmake_minimum_required(2.8.5)
-
 #-----------------------------------------------------------------------
 # CPM configuration
 #-----------------------------------------------------------------------
@@ -34,12 +32,32 @@ endif()
 CPM_InitModule(${CPM_MODULE_NAME})
 
 set(REPO_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/3rdParty/emokit")
-CPM_EnsureRepoIsCurrent(
-  TARGET_DIR ${REPO_SOURCE_DIR}
+
+include(ExternalProject)
+
+#CPM_EnsureRepoIsCurrent(
+#TARGET_DIR ${REPO_SOURCE_DIR}
+#GIT_REPOSITORY "https://github.com/openyou/emokit"
+#GIT_TAG "origin/master"
+#USE_CACHING TRUE
+#)
+set(EMOKIT_TARGET_NAME emokit_external)
+ExternalProject_Add(${EMOKIT_TARGET_NAME}
   GIT_REPOSITORY "https://github.com/openyou/emokit"
   GIT_TAG "origin/master"
-  USE_CACHING TRUE
-  )
+  PATCH_COMMAND ""
+  INSTALL_DIR "${REPOS_SOURCE_DIR}"
+  INSTALL_COMMAND ""
+  CONFIGURE_COMMAND "cmake ."
+  BUILD_COMMAND "make"
+  BUILD_IN_SOURCE 1
+)
 
-add_subdirectory("${REPO_SOURCE_DIR}")
+# list(APPEND CMAKE_MODULE_PATH "${REPO_SOURCE_DIR}")
+# add_subdirectory("${REPO_SOURCE_DIR}")
+# include("${REPO_SOURCE_DIR}/CMakeLists.txt")
+
 CPM_ExportAdditionalIncludeDir("${REPO_SOURCE_DIR}/include")
+CPM_ExportAdditionalLibraryTarget(${EMOKIT_TARGET_NAME})
+
+CPM_ExportAdditionalLibraryTarget(${MONGO_DB_BSON_LIBRARY})
