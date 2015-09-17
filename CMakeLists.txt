@@ -53,12 +53,6 @@ ExternalProject_Get_Property(${EMOKIT_TARGET_NAME} SOURCE_DIR)
 set(REPO_SOURCE_DIR "${SOURCE_DIR}")
 set(REPO_INCLUDE_DIR "${REPO_SOURCE_DIR}/include")
 
-CPM_EnsureRepoIsCurrent(
-  TARGET_DIR ${REPO_SOURCE_DIR}
-  GIT_REPOSITORY "https://github.com/openyou/emokit"
-  USE_CACHING TRUE
-  )
-
 CPM_ExportAdditionalIncludeDir("${REPO_INCLUDE_DIR}")
 include_directories("${REPO_INCLUDE_DIR}")
 message(STATUS "including directory: ${REPO_INCLUDE_DIR}")
