@@ -59,6 +59,9 @@ ExternalProject_Add(${EMOKIT_TARGET_NAME}
 # include("${REPO_SOURCE_DIR}/CMakeLists.txt")
 
 set(REPO_SOURCE_DIR, "${CMAKE_CURRENT_SOURCE_DIR}/src/emokit")
+set(REPO_INCLUDE_DIR, "${REPO_SOURCE_DIR}/include")
 
-CPM_ExportAdditionalIncludeDir("${REPO_SOURCE_DIR}/include")
+CPM_ExportAdditionalIncludeDir(${REPO_INCLUDE_DIR})
+include_directories(${REPO_INCLUDE_DIR})
+
 CPM_ExportAdditionalLibraryTarget("emokit")
