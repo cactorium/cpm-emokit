@@ -41,7 +41,7 @@ include(ExternalProject)
 #GIT_TAG "origin/master"
 #USE_CACHING TRUE
 #)
-set(EMOKIT_TARGET_NAME emokit)
+set(EMOKIT_TARGET_NAME emokit_project)
 ExternalProject_Add(${EMOKIT_TARGET_NAME}
   GIT_REPOSITORY "https://github.com/openyou/emokit"
   GIT_TAG "origin/master"
@@ -61,4 +61,4 @@ ExternalProject_Add(${EMOKIT_TARGET_NAME}
 set(REPO_SOURCE_DIR, "${CMAKE_CURRENT_SOURCE_DIR}/src/emokit")
 
 CPM_ExportAdditionalIncludeDir("${REPO_SOURCE_DIR}/include")
-CPM_ExportAdditionalLibraryTarget(${EMOKIT_TARGET_NAME})
+CPM_ExportAdditionalLibraryTarget("emokit")
